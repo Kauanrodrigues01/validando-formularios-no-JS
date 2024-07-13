@@ -1,12 +1,12 @@
 export default function ehUmCPF(campo) {
-    const cpf = campo.value.replace(/\.|-/g, "")
+    const cpf = campo.value.replace(/\.|-/g, "") // Remove os pontos e traços do CPF para facilitar a validação, deixando apenas os números
 
-    if (validaNumerosRepetidos(cpf) || cpf.length != 11 || validaPrimeiroDigito(cpf) || validaSegundoDigito(cpf)) {
-        campo.setCustomValidity('O CPF digitado não existe.')
+    if (validaNumerosRepetidos(cpf) || cpf.length != 11 || validaPrimeiroDigito(cpf) || validaSegundoDigito(cpf)) { // Se o CPF for inválido
+        campo.setCustomValidity('O CPF digitado não existe.') // Se o CPF for inválido, mostra a mensagem de erro customizada
     }
 }
 
-function validaNumerosRepetidos(cpf) {
+function validaNumerosRepetidos(cpf) { // Verifica se o CPF tem todos os números iguais
     const numerosRepetidos = [
         '00000000000',
         '11111111111',
@@ -23,7 +23,7 @@ function validaNumerosRepetidos(cpf) {
     return numerosRepetidos.includes(cpf)
 }
 
-function validaPrimeiroDigito(cpf) {
+function validaPrimeiroDigito(cpf) { // Verifica se o primeiro dígito verificador do CPF é válido
     let soma = 0
     let multiplicador = 10
 
@@ -41,7 +41,7 @@ function validaPrimeiroDigito(cpf) {
     return soma != parseInt(cpf[9])
 }
 
-function validaSegundoDigito(cpf) {
+function validaSegundoDigito(cpf) { // Verifica se o segundo dígito verificador do CPF é válido
     let soma = 0
     let multiplicador = 11
 
